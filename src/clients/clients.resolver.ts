@@ -63,6 +63,11 @@ export class DeleteClientArgs {
 export class ClientsResolver {
 	constructor(private readonly clientsService: ClientsService) {}
 
+	@Query((returns) => [Client], { name: 'clients' })
+	async getClients() {
+		return await this.clientsService.getClients()
+	}
+
 	@Query((returns) => Client, { name: 'client' })
 	async findClient(@Args() params: FindClientArgs) {
 		return await this.clientsService.findClient(params.id)

@@ -15,6 +15,12 @@ export class ClientsService {
 		private readonly projectModel: Model<ProjectDocument>
 	) {}
 
+	async getClients(): Promise<Client[]> {
+		const ref = await this.clientModel.find()
+
+		return ref
+	}
+
 	async findClient(clientId: string): Promise<Client> {
 		const ref = await this.clientModel.findById(clientId)
 		if (!ref) {
