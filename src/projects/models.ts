@@ -9,8 +9,7 @@ import { Client } from '../clients/models'
 export class Project {
 	@Field(() => String)
 	@IsUUID()
-	@Prop()
-	_id: DbSchema.Types.ObjectId
+	_id?: DbSchema.Types.ObjectId
 
 	@Field()
 	@Length(1, 100)
@@ -25,9 +24,13 @@ export class Project {
 
 	@Field()
 	@Prop()
-	status: string
+	status: ProjectStatus = 'new'
 
 	@Field()
 	@Prop({ type: DbSchema.Types.ObjectId, ref: 'Client' })
 	client: Client
 }
+
+export type ProjectStatus = 'new' | 'progress' | 'completed'
+export type ProjectDocument = Project & Document
+export const ProjectSchema = SchemaFactory.createForClass(Project)
